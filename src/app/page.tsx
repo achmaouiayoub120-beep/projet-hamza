@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Newspaper } from 'lucide-react';
+import { Newspaper, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
 import PostCreator from '@/components/PostCreator';
 import PostCard from '@/components/PostCard';
 import PostSkeleton from '@/components/PostSkeleton';
@@ -65,19 +66,27 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       {/* Page Header */}
-      <div className="flex items-center justify-between mb-2">
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="flex items-center justify-between mb-1"
+      >
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center">
-            <Newspaper className="h-4 w-4 text-primary" />
+          <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center shadow-glow-sm">
+            <Newspaper className="h-5 w-5 text-white" />
           </div>
           <div>
-            <h1 className="text-lg font-bold text-foreground">Fil d'actualite</h1>
-            <p className="text-xs text-muted-foreground">Decouvrez les dernieres publications</p>
+            <h1 className="text-lg font-bold text-foreground">Fil d&apos;actualité</h1>
+            <p className="text-xs text-muted-foreground">Découvrez les dernières publications</p>
           </div>
         </div>
-      </div>
+        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/5 border border-primary/10">
+          <Sparkles className="h-3.5 w-3.5 text-primary" />
+          <span className="text-xs font-medium text-primary">{posts.length} posts</span>
+        </div>
+      </motion.div>
 
       {/* Post Creator */}
       <PostCreator
@@ -86,7 +95,7 @@ export default function Home() {
       />
 
       {/* Posts Feed */}
-      <div className="space-y-4">
+      <div className="space-y-5">
         {isLoading ? (
           <>
             <PostSkeleton />
@@ -94,23 +103,33 @@ export default function Home() {
             <PostSkeleton />
           </>
         ) : posts.length === 0 ? (
-          <div className="card-elevated p-12 text-center">
-            <div className="w-16 h-16 bg-muted rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <Newspaper className="h-7 w-7 text-muted-foreground" />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="card-glass p-12 text-center rounded-2xl"
+          >
+            <div className="w-16 h-16 gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-glow-sm">
+              <Newspaper className="h-7 w-7 text-white" />
             </div>
             <h3 className="text-lg font-semibold text-foreground mb-1">Aucune publication</h3>
             <p className="text-sm text-muted-foreground">
-              Soyez le premier a partager quelque chose avec la communaute.
+              Soyez le premier à partager quelque chose avec la communauté.
             </p>
-          </div>
+          </motion.div>
         ) : (
-          posts.map((post) => (
-            <PostCard
+          posts.map((post, i) => (
+            <motion.div
               key={post.id}
-              post={post}
-              currentUserId={currentUserId}
-              currentUserName={currentUserName}
-            />
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.05, duration: 0.4 }}
+            >
+              <PostCard
+                post={post}
+                currentUserId={currentUserId}
+                currentUserName={currentUserName}
+              />
+            </motion.div>
           ))
         )}
       </div>

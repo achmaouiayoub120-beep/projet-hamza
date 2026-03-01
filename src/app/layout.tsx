@@ -8,14 +8,14 @@ import { extractRouterConfig } from "uploadthing/server";
 import { uploadRouter } from "@/lib/uploadthing/core";
 
 export const metadata: Metadata = {
-  title: "UniSocial - Reseau Social Universitaire",
-  description: "Connectez-vous avec vos camarades et partagez votre experience universitaire",
+  title: "UniSocial - Réseau Social Universitaire",
+  description: "Connectez-vous avec vos camarades et partagez votre expérience universitaire",
 };
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f8fafb" },
-    { media: "(prefers-color-scheme: dark)", color: "#0c1829" },
+    { media: "(prefers-color-scheme: light)", color: "#f5f5f7" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f0f14" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -32,10 +32,10 @@ export default function RootLayout({
         <ThemeProvider>
           <NextSSRPlugin routerConfig={extractRouterConfig(uploadRouter)} />
           <div className="min-h-screen bg-background">
-            <div className="max-w-[1360px] mx-auto flex gap-6 px-4 lg:px-6 py-6">
+            <div className="max-w-[1400px] mx-auto flex gap-6 px-4 lg:px-6 py-6">
               {/* Left Sidebar */}
-              <aside className="hidden md:block w-[240px] flex-shrink-0">
-                <div className="sticky top-6 card-elevated p-4 h-[calc(100vh-48px)] overflow-y-auto">
+              <aside className="hidden md:block w-[250px] flex-shrink-0">
+                <div className="sticky top-6 card-glass p-4 rounded-2xl h-[calc(100vh-48px)] overflow-y-auto">
                   <Sidebar />
                 </div>
               </aside>
@@ -46,7 +46,7 @@ export default function RootLayout({
               </main>
 
               {/* Right Panel */}
-              <aside className="hidden lg:block w-[280px] flex-shrink-0">
+              <aside className="hidden lg:block w-[300px] flex-shrink-0">
                 <div className="sticky top-6 overflow-y-auto max-h-[calc(100vh-48px)] pr-1">
                   <RightPanel />
                 </div>

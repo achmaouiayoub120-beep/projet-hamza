@@ -3,7 +3,7 @@ import "../globals.css";
 
 export const metadata: Metadata = {
   title: "Authentication | UniSocial",
-  description: "Connectez-vous ou inscrivez-vous pour rejoindre la communaute universitaire",
+  description: "Connectez-vous ou inscrivez-vous pour rejoindre la communauté universitaire",
 };
 
 export default function AuthLayout({
@@ -12,8 +12,8 @@ export default function AuthLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
-      <body className="font-sans antialiased">
+    <html lang="fr" suppressHydrationWarning>
+      <body className="font-sans antialiased bg-background text-foreground">
         {children}
       </body>
     </html>
